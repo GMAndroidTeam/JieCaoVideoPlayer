@@ -51,8 +51,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     public static final int THRESHOLD = 80;
     public static final int FULL_SCREEN_NORMAL_DELAY = 500;
 
-    public static boolean ACTION_BAR_EXIST = true;
-    public static boolean TOOL_BAR_EXIST = true;
+//    public static boolean ACTION_BAR_EXIST = true;
+//    public static boolean TOOL_BAR_EXIST = true;
     public static boolean WIFI_TIP_DIALOG_SHOWED = false;
     public static int FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_SENSOR;
     public static int NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
@@ -438,7 +438,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         if (oldT != null) {
             vp.removeView(oldT);
         }
-        showSupportActionBar(getContext());
+//        showSupportActionBar(getContext());
     }
 
     @Override
@@ -471,7 +471,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
         JCUtils.scanForActivity(getContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         clearFullscreenLayout();
-        JCUtils.getAppCompActivity(getContext()).setRequestedOrientation(NORMAL_ORIENTATION);
+        JCUtils.scanForActivity(getContext()).setRequestedOrientation(NORMAL_ORIENTATION);
 
         // 清理cover image,回收bitmap内存
         clearCacheImage();
@@ -484,7 +484,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         obtainCache();
 
         Log.i(TAG, "backToOtherListener " + " [" + this.hashCode() + "] ");
-        JCUtils.getAppCompActivity(getContext()).setRequestedOrientation(NORMAL_ORIENTATION);
+        JCUtils.scanForActivity(getContext()).setRequestedOrientation(NORMAL_ORIENTATION);
         if (currentScreen == JCVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN
                 || currentScreen == JCVideoPlayerStandard.SCREEN_WINDOW_TINY) {
 //            if (currentScreen == JCVideoPlayerStandard.SCREEN_WINDOW_FULLSCREEN) {
@@ -497,7 +497,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             if (JCVideoPlayerManager.LISTENERLIST.size() == 1) {//directly fullscreen
                 JCVideoPlayerManager.popListener().onCompletion();
                 JCMediaManager.instance().releaseMediaPlayer();
-                showSupportActionBar(getContext());
+//                showSupportActionBar(getContext());
                 return true;
             }
             ViewGroup vp = (ViewGroup) (JCUtils.scanForActivity(getContext()))//.getWindow().getDecorView();
@@ -525,10 +525,10 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
                 && currentScreen != SCREEN_WINDOW_FULLSCREEN
                 && currentScreen != SCREEN_WINDOW_TINY) {
             if (x > 0) {
-                JCUtils.getAppCompActivity(getContext()).setRequestedOrientation(
+                JCUtils.scanForActivity(getContext()).setRequestedOrientation(
                         ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             } else {
-                JCUtils.getAppCompActivity(getContext()).setRequestedOrientation(
+                JCUtils.scanForActivity(getContext()).setRequestedOrientation(
                         ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE);
             }
             startWindowFullscreen();
@@ -554,7 +554,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         setUiWitStateAndScreen(currentState);
         addTextureView();
 
-        showSupportActionBar(getContext());
+//        showSupportActionBar(getContext());
     }
 
     @Override
@@ -688,8 +688,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 
         Log.i(TAG, "startWindowFullscreen " + " [" + this.hashCode() + "] ");
         CLICK_QUIT_FULLSCREEN_TIME = System.currentTimeMillis();
-        hideSupportActionBar(getContext());
-        JCUtils.getAppCompActivity(getContext()).setRequestedOrientation(FULLSCREEN_ORIENTATION);
+//        hideSupportActionBar(getContext());
+        JCUtils.scanForActivity(getContext()).setRequestedOrientation(FULLSCREEN_ORIENTATION);
 
         ViewGroup vp = (ViewGroup) (JCUtils.scanForActivity(getContext()))//.getWindow().getDecorView();
                 .findViewById(Window.ID_ANDROID_CONTENT);
@@ -915,8 +915,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 
     public static void startFullscreen(Context context, Class _class, String url, Object... objects) {
 
-        hideSupportActionBar(context);
-        JCUtils.getAppCompActivity(context).setRequestedOrientation(FULLSCREEN_ORIENTATION);
+//        hideSupportActionBar(context);
+        JCUtils.scanForActivity(context).setRequestedOrientation(FULLSCREEN_ORIENTATION);
         ViewGroup vp = (ViewGroup) (JCUtils.scanForActivity(context))//.getWindow().getDecorView();
                 .findViewById(Window.ID_ANDROID_CONTENT);
         View old = vp.findViewById(JCVideoPlayer.FULLSCREEN_ID);
@@ -947,32 +947,32 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         }
     }
 
-    public static void hideSupportActionBar(Context context) {
-        if (ACTION_BAR_EXIST) {
-            ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();
-            if (ab != null) {
-                ab.setShowHideAnimationEnabled(false);
-                ab.hide();
-            }
-        }
-        if (TOOL_BAR_EXIST) {
-            JCUtils.getAppCompActivity(context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-    }
+//    public static void hideSupportActionBar(Context context) {
+//        if (ACTION_BAR_EXIST) {
+//            ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();
+//            if (ab != null) {
+//                ab.setShowHideAnimationEnabled(false);
+//                ab.hide();
+//            }
+//        }
+//        if (TOOL_BAR_EXIST) {
+//            JCUtils.getAppCompActivity(context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        }
+//    }
 
-    public static void showSupportActionBar(Context context) {
-        if (ACTION_BAR_EXIST) {
-            ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();
-            if (ab != null) {
-                ab.setShowHideAnimationEnabled(false);
-                ab.show();
-            }
-        }
-        if (TOOL_BAR_EXIST) {
-            JCUtils.getAppCompActivity(context).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        }
-    }
+//    public static void showSupportActionBar(Context context) {
+//        if (ACTION_BAR_EXIST) {
+//            ActionBar ab = JCUtils.getAppCompActivity(context).getSupportActionBar();
+//            if (ab != null) {
+//                ab.setShowHideAnimationEnabled(false);
+//                ab.show();
+//            }
+//        }
+//        if (TOOL_BAR_EXIST) {
+//            JCUtils.getAppCompActivity(context).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        }
+//    }
 
     public static class JCAutoFullscreenListener implements SensorEventListener {
         @Override
