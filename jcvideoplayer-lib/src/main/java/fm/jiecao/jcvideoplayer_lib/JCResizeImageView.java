@@ -6,6 +6,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
+import static android.R.attr.width;
+
 /**
  * <p>参照Android系统的VideoView的onMeasure方法
  * <br>注意!relativelayout中无法全屏，要嵌套一个linearlayout</p>
@@ -20,6 +22,7 @@ public class JCResizeImageView extends ImageView {
 
     // x as width, y as height
     protected Point mVideoSize;
+    protected int currentScreen;
 
     public JCResizeImageView(Context context) {
         super(context);
@@ -35,7 +38,8 @@ public class JCResizeImageView extends ImageView {
         mVideoSize = new Point(0, 0);
     }
 
-    public void setVideoSize(Point videoSize) {
+    public void setVideoSize(Point videoSize, int currentScreen) {
+        this.currentScreen = currentScreen;
         if (videoSize != null && !mVideoSize.equals(videoSize)) {
             this.mVideoSize = videoSize;
             requestLayout();
@@ -67,6 +71,10 @@ public class JCResizeImageView extends ImageView {
 
         int videoWidth = mVideoSize.x;
         int videoHeight = mVideoSize.y;
+        if (currentScreen == JCVideoPlayer.SCREEN_LAYOUT_LIST){
+            setMeasuredDimension(videoWidth, videoHeight);
+            return;
+        }
 
         if (DEBUG) {
             Log.i(TAG, "videoWidth = " + videoWidth + ", " + "videoHeight = " + videoHeight);

@@ -7,6 +7,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.TextureView;
 
+import static android.R.attr.width;
+
 /**
  * <p>参照Android系统的VideoView的onMeasure方法
  * <br>注意!relativelayout中无法全屏，要嵌套一个linearlayout</p>
@@ -22,6 +24,7 @@ public class JCResizeTextureView extends TextureView {
     // x as width, y as height
     protected Point mVideoSize;
     protected boolean hasUpdated;
+    protected int currentScreen;
 
     public JCResizeTextureView(Context context) {
         super(context);
@@ -64,10 +67,17 @@ public class JCResizeTextureView extends TextureView {
         mVideoSize = new Point(0, 0);
     }
 
-    public void setVideoSize(Point videoSize) {
+    public void setVideoSize(Point videoSize, int currentScreen) {
+        this.currentScreen = currentScreen;
         if (videoSize != null && !mVideoSize.equals(videoSize)) {
             this.mVideoSize = videoSize;
             requestLayout();
+        }
+        if (currentScreen == JCVideoPlayer.SCREEN_LAYOUT_LIST){
+            // 静音
+            JCMediaManager.instance().mediaPlayer.setVolume(0.0f,0.0f);
+        }else{
+            JCMediaManager.instance().mediaPlayer.setVolume(1.0f,1.0f);
         }
     }
 
@@ -103,6 +113,10 @@ public class JCResizeTextureView extends TextureView {
 
         int videoWidth = mVideoSize.x;
         int videoHeight = mVideoSize.y;
+        if (currentScreen == JCVideoPlayer.SCREEN_LAYOUT_LIST){
+            setMeasuredDimension(videoWidth, videoHeight);
+            return;
+        }
 
         if (DEBUG) {
             Log.i(TAG, "videoWidth = " + videoWidth + ", " + "videoHeight = " + videoHeight);

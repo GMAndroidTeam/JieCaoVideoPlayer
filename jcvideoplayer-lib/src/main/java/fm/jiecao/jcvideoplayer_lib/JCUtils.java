@@ -86,4 +86,8 @@ public class JCUtils {
         return (int) (dpValue * scale + 0.5f);
     }
 
+    public static int screenWidth (Context context){
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+
 }
