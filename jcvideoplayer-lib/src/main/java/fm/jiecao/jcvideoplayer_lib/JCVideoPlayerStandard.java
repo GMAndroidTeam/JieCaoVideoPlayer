@@ -353,7 +353,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -389,7 +389,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -527,7 +527,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             thumbImageView.setVisibility(View.GONE);
         }
         coverImageView.setVisibility(coverImg);
-        bottomProgressBar.setVisibility(bottomPro);
+        bottomProgressBar.setVisibility(GONE);
     }
 
     public void updateStartImage() {
@@ -536,7 +536,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         } else if (currentState == CURRENT_STATE_ERROR) {
             startButton.setImageResource(R.drawable.jc_click_error_selector);
         } else {
-            startButton.setImageResource(R.drawable.jc_click_play_selector);
+            startButton.setImageResource(R.drawable.gm_btn_start);
         }
     }
 
@@ -658,7 +658,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                             topContainer.setVisibility(View.INVISIBLE);
                             startButton.setVisibility(View.INVISIBLE);
                             if (currentScreen != SCREEN_WINDOW_TINY) {
-                                bottomProgressBar.setVisibility(View.VISIBLE);
+                                bottomProgressBar.setVisibility(GONE);
                             }
                         }
                     });

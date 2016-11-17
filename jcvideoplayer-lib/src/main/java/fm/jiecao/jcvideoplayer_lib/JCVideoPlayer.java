@@ -11,7 +11,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -38,6 +37,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
+
 
 /**
  * Created by Nathen on 16/7/30.
@@ -227,20 +227,23 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
                 onEvent(JCBuriedPoint.ON_CLICK_START_AUTO_COMPLETE);
                 prepareVideo();
             }
-        } else if (i == R.id.fullscreen) {
-            Log.i(TAG, "onClick fullscreen [" + this.hashCode() + "] ");
+        } else if (i == R.id.surface_container) {
+            Log.i(TAG, "onClick surfaceContainer State=Error [" + this.hashCode() + "] ");
+            if (currentState == CURRENT_STATE_ERROR){
+                prepareVideo();
+            }
             if (currentState == CURRENT_STATE_AUTO_COMPLETE) return;
-            if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
-                //quit fullscreen
-                backPress();
-            } else {
+           if(currentScreen==SCREEN_LAYOUT_NORMAL || currentScreen==SCREEN_LAYOUT_LIST){
                 Log.d(TAG, "toFullscreenActivity [" + this.hashCode() + "] ");
                 onEvent(JCBuriedPoint.ON_ENTER_FULLSCREEN);
                 startWindowFullscreen();
             }
-        } else if (i == R.id.surface_container && currentState == CURRENT_STATE_ERROR) {
-            Log.i(TAG, "onClick surfaceContainer State=Error [" + this.hashCode() + "] ");
-            prepareVideo();
+        }  else if(i==R.id.back){
+            if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
+                //quit fullscreen
+                backPress();
+                prepareVideo();
+            }
         }
     }
 
