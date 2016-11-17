@@ -60,8 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1.0"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:background="@null"
             android:max="100"
+
             android:maxHeight="4dp"
             android:minHeight="4dp"
             android:paddingBottom="8dp"
