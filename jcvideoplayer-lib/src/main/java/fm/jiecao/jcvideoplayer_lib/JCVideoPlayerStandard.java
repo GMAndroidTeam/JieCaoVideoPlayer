@@ -425,7 +425,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
@@ -461,7 +461,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
