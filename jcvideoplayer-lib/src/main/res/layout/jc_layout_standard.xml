@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:layout_above="@+id/bottom_progressbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
