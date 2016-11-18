@@ -15,7 +15,6 @@ import com.squareup.picasso.Picasso;
 import fm.jiecao.jcvideoplayer_lib.JCBuriedPoint;
 import fm.jiecao.jcvideoplayer_lib.JCBuriedPointStandard;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
-import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerSimple;
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 /**
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     JCVideoPlayerStandard mJcVideoPlayerStandard;
-    JCVideoPlayerSimple mJcVideoPlayerSimple;
+//    JCVideoPlayerSimple mJcVideoPlayerSimple;
 
     Button mTinyWindow, mAutoTinyWindow, mAboutListView, mAboutUI, mPlayDirectly, mAboutWebView;
 
@@ -51,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPlayDirectly.setOnClickListener(this);
         mAboutWebView.setOnClickListener(this);
 
-        mJcVideoPlayerSimple = (JCVideoPlayerSimple) findViewById(R.id.simple_demo);
-        mJcVideoPlayerSimple.setUp("http://devimages.apple.com/iphone/samples/bipbop/gear1/prog_index.m3u8"
-                , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "嫂子在家吗");
+//        mJcVideoPlayerSimple = (JCVideoPlayerSimple) findViewById(R.id.simple_demo);
+//        mJcVideoPlayerSimple.setUp("http://devimages.apple.com/iphone/samples/bipbop/gear1/prog_index.m3u8"
+//                , JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL, "嫂子在家吗");
 
         mJcVideoPlayerStandard = (JCVideoPlayerStandard) findViewById(R.id.jc_video);
         mJcVideoPlayerStandard.setUp("http://video.jiecao.fm/8/17/%E6%8A%AB%E8%90%A8.mp4"
