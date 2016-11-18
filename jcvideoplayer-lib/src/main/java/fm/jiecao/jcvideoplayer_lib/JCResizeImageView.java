@@ -18,7 +18,6 @@ import static android.R.attr.width;
  */
 public class JCResizeImageView extends ImageView {
     protected static final String TAG = "JCResizeImageView";
-    protected static final boolean DEBUG = false;
 
     // x as width, y as height
     protected Point mVideoSize;
@@ -64,23 +63,11 @@ public class JCResizeImageView extends ImageView {
             heightMeasureSpec = tempMeasureSpec;
         }
 
-        if (DEBUG) {
-            Log.i(TAG, "onMeasure " + " [" + this.hashCode() + "] ");
-            Log.i(TAG, "viewRotation = " + viewRotation);
-        }
-
         int videoWidth = mVideoSize.x;
         int videoHeight = mVideoSize.y;
         if (currentScreen == JCVideoPlayer.SCREEN_LAYOUT_LIST){
             setMeasuredDimension(videoWidth, videoHeight);
             return;
-        }
-
-        if (DEBUG) {
-            Log.i(TAG, "videoWidth = " + videoWidth + ", " + "videoHeight = " + videoHeight);
-            if (videoWidth > 0 && videoHeight > 0) {
-                Log.i(TAG, "videoWidth / videoHeight = " + videoWidth / videoHeight);
-            }
         }
 
         int width = getDefaultSize(videoWidth, widthMeasureSpec);
@@ -91,11 +78,6 @@ public class JCResizeImageView extends ImageView {
             int widthSpecSize = MeasureSpec.getSize(widthMeasureSpec);
             int heightSpecMode = MeasureSpec.getMode(heightMeasureSpec);
             int heightSpecSize = MeasureSpec.getSize(heightMeasureSpec);
-
-            if (DEBUG) {
-                Log.i(TAG, "widthMeasureSpec  [" + MeasureSpec.toString(widthMeasureSpec) + "]");
-                Log.i(TAG, "heightMeasureSpec [" + MeasureSpec.toString(heightMeasureSpec) + "]");
-            }
 
             if (widthSpecMode == MeasureSpec.EXACTLY && heightSpecMode == MeasureSpec.EXACTLY) {
                 // the size is fixed
@@ -143,10 +125,6 @@ public class JCResizeImageView extends ImageView {
             }
         } else {
             // no size yet, just adopt the given spec sizes
-        }
-        if (DEBUG) {
-            Log.i(TAG, "viewWidth = " + width + ", " + "viewHeight = " + height);
-            Log.i(TAG, "viewWidth / viewHeight = " + width / height);
         }
         setMeasuredDimension(width, height);
     }

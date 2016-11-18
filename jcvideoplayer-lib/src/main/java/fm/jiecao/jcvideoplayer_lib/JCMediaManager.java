@@ -106,7 +106,6 @@ public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPl
                     } else {
                         Surface holder = (Surface) msg.obj;
                         if (holder.isValid()) {
-                            Log.i(TAG, "set surface");
                             instance().mediaPlayer.setSurface(holder);
                             mainThreadHandler.post(new Runnable() {
                                 @Override
