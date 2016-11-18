@@ -532,9 +532,9 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     public void updateStartImage() {
         if (currentState == CURRENT_STATE_PLAYING) {
-            startButton.setImageResource(R.drawable.jc_click_pause_selector);
+            startButton.setImageResource(R.drawable.gm_btn_pause);
         } else if (currentState == CURRENT_STATE_ERROR) {
-            startButton.setImageResource(R.drawable.jc_click_error_selector);
+            startButton.setImageResource(R.drawable.gm_btn_pause);
         } else {
             startButton.setImageResource(R.drawable.gm_btn_start);
         }
