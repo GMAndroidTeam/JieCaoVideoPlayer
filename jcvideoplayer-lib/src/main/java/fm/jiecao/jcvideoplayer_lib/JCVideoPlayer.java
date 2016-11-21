@@ -211,7 +211,6 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
                 onEvent(currentState != CURRENT_STATE_ERROR ? JCUserAction.ON_CLICK_START_ICON : JCUserAction.ON_CLICK_START_ERROR);
             } else if (currentState == CURRENT_STATE_PLAYING) {
                 obtainCache();
-                onEvent(JCBuriedPoint.ON_CLICK_PAUSE);
                 onEvent(JCUserAction.ON_CLICK_PAUSE);
                 JCMediaManager.instance().mediaPlayer.pause();
                 setUiWitStateAndScreen(CURRENT_STATE_PAUSE);
@@ -230,14 +229,14 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             }
             if (currentState == CURRENT_STATE_AUTO_COMPLETE) return;
            if(currentScreen==SCREEN_LAYOUT_NORMAL || currentScreen==SCREEN_LAYOUT_LIST){
-                onEvent(JCBuriedPoint.ON_ENTER_FULLSCREEN);
+                onEvent(JCUserAction.ON_ENTER_FULLSCREEN);
                 startWindowFullscreen();
             }
         }  else if(i==R.id.back){
             if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
                 //quit fullscreen
                 backPress();
-                prepareVideo();
+//                prepareVideo();
             }
         }
     }
@@ -639,7 +638,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        onEvent(JCBuriedPoint.ON_SEEK_POSITION);
+        onEvent(JCUserAction.ON_SEEK_POSITION);
         startProgressTimer();
         ViewParent vpup = getParent();
         while (vpup != null) {
@@ -704,7 +703,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     }
 
     public void startWindowTiny() {
-        onEvent(JCBuriedPoint.ON_ENTER_TINYSCREEN);
+        onEvent(JCUserAction.ON_ENTER_TINYSCREEN);
 
         ViewGroup vp = (ViewGroup) (JCUtils.scanForActivity(getContext()))//.getWindow().getDecorView();
                 .findViewById(Window.ID_ANDROID_CONTENT);
