@@ -236,6 +236,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             if (currentScreen == SCREEN_WINDOW_FULLSCREEN) {
                 //quit fullscreen
                 backPress();
+                releaseAllVideos();
 //                prepareVideo();
             }
         }
