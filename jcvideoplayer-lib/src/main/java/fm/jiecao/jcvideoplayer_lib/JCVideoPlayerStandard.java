@@ -3,6 +3,7 @@ package fm.jiecao.jcvideoplayer_lib;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     public ImageView thumbImageView;
     public ImageView coverImageView;
     public ImageView tinyBackImageView;
+    public Handler preparedHandler;
 
 
     protected DismissControlViewTimerTask mDismissControlViewTimerTask;
@@ -60,6 +62,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         thumbImageView.setOnClickListener(this);
         backButton.setOnClickListener(this);
         tinyBackImageView.setOnClickListener(this);
+        preparedHandler = new Handler();
 
     }
 
@@ -341,8 +344,15 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void onPrepared() {
         super.onPrepared();
-        setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
-                View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
+        // 开始播放时会有一帧是黑的，跳过这一帧
+        preparedHandler.removeCallbacksAndMessages(null);
+        preparedHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
+                        View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
+            }
+        },16);
         startDismissControlViewTimer();
     }
 
@@ -351,7 +361,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
                 setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
-                        View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE);
+                        View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE);
                 updateStartImage();
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
