@@ -344,7 +344,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void onPrepared() {
         super.onPrepared();
-        // 开始播放时会有一帧是黑的，跳过这一帧
+        // 延迟隐藏thumbImageView
         preparedHandler.removeCallbacksAndMessages(null);
         preparedHandler.postDelayed(new Runnable() {
             @Override
@@ -352,7 +352,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                 setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE);
             }
-        },16);
+        },100);
         startDismissControlViewTimer();
     }
 
