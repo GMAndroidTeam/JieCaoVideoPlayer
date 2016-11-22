@@ -200,9 +200,13 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                 onClickUiToggle();
             }
         } else if (i == R.id.surface_container) {
-            startDismissControlViewTimer();
+//            startDismissControlViewTimer();
+            if (currentScreen == SCREEN_LAYOUT_LIST){
+                startWindowFullscreen();
+            }
         } else if (i == R.id.back) {
             backPress();
+            releaseAllVideos();
         } else if (i == R.id.back_tiny) {
             if (JCVideoPlayerManager.CURRENT_SCROLL_LISTENER.get() != null) {
                 if (JCVideoPlayerManager.CURRENT_SCROLL_LISTENER.get().getUrl() != JCMediaManager.instance().mediaPlayer.getDataSource()) {
@@ -247,7 +251,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void onVideoSizeChanged() {
         super.onVideoSizeChanged();
-        cacheImageView.setVideoSize(JCMediaManager.instance().getVideoSize());
+        cacheImageView.setVideoSize(JCMediaManager.instance().getVideoSize(), currentScreen);
     }
 
     // onSurfaceTextureSizeChanged 在 onSurfaceTextureUpdated 之前调用
@@ -316,7 +320,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     @Override
     public void addTextureView() {
         super.addTextureView();
-        cacheImageView.setVideoSize(JCMediaManager.instance().getVideoSize());
+        cacheImageView.setVideoSize(JCMediaManager.instance().getVideoSize(), currentScreen);
         cacheImageView.setRotation(JCMediaManager.instance().videoRotation);
     }
 
@@ -458,7 +462,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     public void onPrepared() {
         super.onPrepared();
         setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
-                View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                 View.INVISIBLE);
         startDismissControlViewTimer();
     }
@@ -467,7 +471,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE);
                 updateStartImage();
@@ -489,7 +493,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
                 setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
-                        View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                        View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         cacheImageView.getVisibility());
                 break;
             case SCREEN_WINDOW_FULLSCREEN:
@@ -507,7 +511,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         cacheImageView.getVisibility());
                 updateStartImage();
@@ -547,7 +551,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.INVISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         cacheImageView.getVisibility());
                 break;
@@ -567,7 +571,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
                 setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
-                        View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
+                        View.VISIBLE, View.INVISIBLE, View.INVISIBLE, View.INVISIBLE,
                         cacheImageView.getVisibility());
                 updateStartImage();
                 break;
@@ -587,7 +591,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
         switch (currentScreen) {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
-                setAllControlsVisible(View.VISIBLE, View.VISIBLE, View.VISIBLE,
+                setAllControlsVisible(View.VISIBLE, View.INVISIBLE, View.VISIBLE,
                         View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE);
                 updateStartImage();
@@ -609,7 +613,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             case SCREEN_LAYOUT_NORMAL:
             case SCREEN_LAYOUT_LIST:
                 setAllControlsVisible(View.INVISIBLE, View.INVISIBLE, View.VISIBLE,
-                        View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.VISIBLE,
+                        View.INVISIBLE, View.VISIBLE, View.INVISIBLE, View.INVISIBLE,
                         View.INVISIBLE);
                 updateStartImage();
                 break;
@@ -665,11 +669,11 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
 
     public void updateStartImage() {
         if (currentState == CURRENT_STATE_PLAYING) {
-            startButton.setImageResource(R.drawable.jc_click_pause_selector);
+            startButton.setImageResource(R.drawable.gm_btn_pause);
         } else if (currentState == CURRENT_STATE_ERROR) {
-            startButton.setImageResource(R.drawable.jc_click_error_selector);
+            startButton.setImageResource(R.drawable.gm_btn_start);
         } else {
-            startButton.setImageResource(R.drawable.jc_click_play_selector);
+            startButton.setImageResource(R.drawable.gm_btn_start);
         }
     }
 

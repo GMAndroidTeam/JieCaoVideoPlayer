@@ -93,4 +93,7 @@ public class JCUtils {
     public static void switchNormalOrientation(Context context) {
         getAppCompActivity(context).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+    public static int getDisplayWidth(Context context) {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
 }
