@@ -193,6 +193,10 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
                 Toast.makeText(getContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
                 return;
             }
+            if (!JCUtils.isNetworkConnected(getContext())){
+                Toast.makeText(getContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (currentState == CURRENT_STATE_NORMAL || currentState == CURRENT_STATE_ERROR) {
 //                if (!url.startsWith("file") && !JCUtils.isWifiConnected(getContext()) && !WIFI_TIP_DIALOG_SHOWED) {
 //                    showWifiDialog();

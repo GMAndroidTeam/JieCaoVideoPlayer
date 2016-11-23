@@ -96,4 +96,13 @@ public class JCUtils {
     public static int getDisplayWidth(Context context) {
         return context.getResources().getDisplayMetrics().widthPixels;
     }
+
+    public static boolean isNetworkConnected(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (null != networkInfo && networkInfo.isAvailable() && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
+    }
 }
