@@ -191,10 +191,10 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                 return;
             }
             if (currentState == CURRENT_STATE_NORMAL) {
-                if (!url.startsWith("file") && !JCUtils.isWifiConnected(getContext()) && !WIFI_TIP_DIALOG_SHOWED) {
-                    showWifiDialog();
-                    return;
-                }
+//                if (!url.startsWith("file") && !JCUtils.isWifiConnected(getContext()) && !WIFI_TIP_DIALOG_SHOWED) {
+//                    showWifiDialog();
+//                    return;
+//                }
                 startPlayLogic();
             } else if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
                 onClickUiToggle();
