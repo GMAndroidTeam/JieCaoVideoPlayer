@@ -201,7 +201,7 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
             }
         } else if (i == R.id.surface_container) {
 //            startDismissControlViewTimer();
-            if (currentScreen == SCREEN_LAYOUT_LIST){
+            if (currentScreen == SCREEN_LAYOUT_LIST && currentState == CURRENT_STATE_PLAYING){
                 startWindowFullscreen();
             }
         } else if (i == R.id.back) {

@@ -232,6 +232,10 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             }
         } else if (i == R.id.surface_container && currentState == CURRENT_STATE_ERROR) {
 //            Log.i(TAG, "onClick surfaceContainer State=Error [" + this.hashCode() + "] ");
+            if (!JCUtils.isNetworkConnected(getContext())){
+                Toast.makeText(getContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                return;
+            }
             prepareVideo();
         }
     }

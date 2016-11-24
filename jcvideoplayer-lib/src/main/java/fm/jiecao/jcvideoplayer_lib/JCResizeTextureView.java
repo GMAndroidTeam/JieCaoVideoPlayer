@@ -239,4 +239,10 @@ public class JCResizeTextureView extends TextureView {
 //        }
 //        setMeasuredDimension(width, height);
 //    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        getSurfaceTexture().release();
+    }
 }

@@ -81,6 +81,7 @@ public class JCMediaManager implements IMediaPlayer.OnPreparedListener, IMediaPl
                     try {
                         currentVideoWidth = 0;
                         currentVideoHeight = 0;
+                        mediaPlayer.reset();
                         mediaPlayer.release();
                         mediaPlayer = new IjkMediaPlayer();
                         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
