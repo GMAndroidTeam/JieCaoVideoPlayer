@@ -190,14 +190,16 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                 Toast.makeText(getContext(), getResources().getString(R.string.no_url), Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (currentState == CURRENT_STATE_NORMAL) {
+            if (currentState == CURRENT_STATE_NORMAL || currentState == CURRENT_STATE_AUTO_COMPLETE || currentState == CURRENT_STATE_ERROR) {
 //                if (!url.startsWith("file") && !JCUtils.isWifiConnected(getContext()) && !WIFI_TIP_DIALOG_SHOWED) {
 //                    showWifiDialog();
 //                    return;
 //                }
+                if (!JCUtils.isNetworkConnected(getContext())){
+                    Toast.makeText(getContext(), getResources().getString(R.string.no_connection), Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 startPlayLogic();
-            } else if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
-                onClickUiToggle();
             }
         } else if (i == R.id.surface_container) {
 //            startDismissControlViewTimer();
