@@ -203,7 +203,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 //                    return;
 //                }
                 prepareVideo();
-                onEvent(currentState != CURRENT_STATE_ERROR ? JCBuriedPoint.ON_CLICK_START_ICON : JCBuriedPoint.ON_CLICK_START_ERROR);
+                onEvent(JCBuriedPoint.ON_CLICK_START_ICON);
             } else if (currentState == CURRENT_STATE_PLAYING) {
                 onEvent(JCBuriedPoint.ON_CLICK_PAUSE);
 //                Log.d(TAG, "pauseVideo [" + this.hashCode() + "] ");

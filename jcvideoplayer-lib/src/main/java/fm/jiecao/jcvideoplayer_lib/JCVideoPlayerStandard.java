@@ -200,15 +200,18 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
                     return;
                 }
                 startPlayLogic();
+                onEvent(JCBuriedPoint.ON_CLICK_START_ICON);
             }
         } else if (i == R.id.surface_container) {
 //            startDismissControlViewTimer();
             if (currentScreen == SCREEN_LAYOUT_LIST && currentState == CURRENT_STATE_PLAYING){
                 startWindowFullscreen();
+                onEvent(JCBuriedPoint.ON_ENTER_FULLSCREEN);
             }
         } else if (i == R.id.back) {
             backPress();
             releaseAllVideos();
+            onEvent(JCBuriedPoint.ON_QUIT_FULLSCREEN);
         } else if (i == R.id.back_tiny) {
             if (JCVideoPlayerManager.CURRENT_SCROLL_LISTENER.get() != null) {
                 if (JCVideoPlayerManager.CURRENT_SCROLL_LISTENER.get().getUrl() != JCMediaManager.instance().mediaPlayer.getDataSource()) {
