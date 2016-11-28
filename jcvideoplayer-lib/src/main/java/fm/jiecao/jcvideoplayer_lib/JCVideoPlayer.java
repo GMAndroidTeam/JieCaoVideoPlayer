@@ -843,7 +843,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     }
 
     public void onEvent(int type) {
-        if (JC_BURIED_POINT != null && isCurrentMediaListener()) {
+        if (JC_BURIED_POINT != null) {
             JC_BURIED_POINT.onEvent(type, url, currentScreen, objects);
         }
     }
