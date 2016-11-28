@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .into(mJcVideoPlayerStandard.thumbImageView);
 //        mJcVideoPlayerStandard.setLoop(true);
 
-        JCVideoPlayer.setJcBuriedPoint(new MyJCBuriedPointStandard());
+        mJcVideoPlayerStandard.setJcBuriedPoint(new MyJCBuriedPointStandard());
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSensorEventListener = new JCVideoPlayer.JCAutoFullscreenListener();
     }
