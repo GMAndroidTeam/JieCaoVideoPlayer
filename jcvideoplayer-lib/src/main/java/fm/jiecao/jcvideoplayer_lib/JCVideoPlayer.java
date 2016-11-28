@@ -84,7 +84,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     public ViewGroup topContainer, bottomContainer;
     public Surface surface;
 
-    protected static WeakReference<JCBuriedPoint> JC_BURIED_POINT;
+    protected JCBuriedPoint JC_BURIED_POINT;
     protected static Timer                        UPDATE_PROGRESS_TIMER;
 
     protected int               mScreenWidth;
@@ -838,13 +838,13 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
         JCMediaManager.instance().releaseMediaPlayer();
     }
 
-    public static void setJcBuriedPoint(JCBuriedPoint jcBuriedPoint) {
-        JC_BURIED_POINT = new WeakReference<>(jcBuriedPoint);
+    public void setJcBuriedPoint(JCBuriedPoint jcBuriedPoint) {
+        JC_BURIED_POINT = jcBuriedPoint;
     }
 
     public void onEvent(int type) {
-        if (JC_BURIED_POINT != null && JC_BURIED_POINT.get() != null && isCurrentMediaListener()) {
-            JC_BURIED_POINT.get().onEvent(type, url, currentScreen, objects);
+        if (JC_BURIED_POINT != null && isCurrentMediaListener()) {
+            JC_BURIED_POINT.onEvent(type, url, currentScreen, objects);
         }
     }
 
