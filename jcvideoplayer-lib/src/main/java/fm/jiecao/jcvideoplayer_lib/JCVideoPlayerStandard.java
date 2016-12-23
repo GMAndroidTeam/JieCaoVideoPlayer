@@ -351,7 +351,8 @@ public class JCVideoPlayerStandard extends JCVideoPlayer {
     }
 
     public void startPlayLogic() {
-        prepareVideo();
+//        prepareVideo();
+        startFullscreen(mContext, JCVideoPlayerStandard.class, url, "");
         onEvent(JCBuriedPointStandard.ON_CLICK_START_THUMB);
     }
 
