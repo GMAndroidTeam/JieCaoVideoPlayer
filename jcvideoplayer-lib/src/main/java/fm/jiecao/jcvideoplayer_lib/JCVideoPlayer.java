@@ -83,6 +83,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     public ViewGroup textureViewContainer;
     public ViewGroup topContainer, bottomContainer;
     public Surface surface;
+    public Context mContext;
 
     protected JCBuriedPoint JC_BURIED_POINT;
     protected static Timer                        UPDATE_PROGRESS_TIMER;
@@ -113,6 +114,7 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
     }
 
     public void init(Context context) {
+        mContext = context;
         View.inflate(context, getLayoutId(), this);
         startButton = (ImageView) findViewById(R.id.start);
         fullscreenButton = (ImageView) findViewById(R.id.fullscreen);
@@ -202,7 +204,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
 //                    showWifiDialog();
 //                    return;
 //                }
-                prepareVideo();
+//                prepareVideo();
+                startFullscreen(mContext, JCVideoPlayerStandard.class, url, "");
                 onEvent(JCBuriedPoint.ON_CLICK_START_ICON);
             } else if (currentState == CURRENT_STATE_PLAYING) {
                 onEvent(JCBuriedPoint.ON_CLICK_PAUSE);
@@ -911,7 +914,8 @@ public abstract class JCVideoPlayer extends FrameLayout implements JCMediaPlayer
             jcVideoPlayer.addTextureView();
 //            jcVideoPlayer.setRotation(90);
 
-            jcVideoPlayer.startButton.performClick();
+//            jcVideoPlayer.startButton.performClick();
+            jcVideoPlayer.prepareVideo();
 
         } catch (InstantiationException e) {
             e.printStackTrace();
